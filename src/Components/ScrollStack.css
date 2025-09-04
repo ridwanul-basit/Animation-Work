@@ -1,0 +1,16 @@
+/* src/Components/ScrollStack.css */
+.scroll-stack-container {
+  height: auto; /* enough scroll height */
+  position: relative;
+}
+
+.scroll-stack-card {
+  position: sticky;
+  top: 0;
+  height: auto; /* full screen */
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  /* background: white; */
+  /* box-shadow: 0 4px 20px rgba(0,0,0,0.1); */
+}
