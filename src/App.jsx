@@ -8,6 +8,10 @@ import ScrollStack, { ScrollStackItem } from './Components/ScrollStack'
 import ThirdSlide from './Components/Thirdslide'
 import TwoRowSlide from './Components/TwoRowSlide'
 import Events from './Components/Events'
+import Help from './Components/Help'
+import Contact from './Components/Contact'
+import Last from './Components/Last'
+import Footer from './Components/Footer'
 
 
 function App() {
@@ -34,6 +38,10 @@ function App() {
     <ThirdSlide></ThirdSlide>
     <TwoRowSlide></TwoRowSlide>
      <Events></Events>
+     {/* <Help></Help>
+     <Contact></Contact> */}
+     <Last></Last>
+     <Footer></Footer>
 
     
     

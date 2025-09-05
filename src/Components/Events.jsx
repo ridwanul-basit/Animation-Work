@@ -12,7 +12,7 @@ const Events = () => {
       {/* Header */}
       <div className="mb-24">
         <h1 className="text-8xl font-bold text-[#5E362C]">Upcoming Events</h1>
-        <p className="text-2xl text-[#5E362C] mt-2">Mark your calendar</p>
+        <p className="text-2xl text-[#5E362C] mt-3">Mark your calendar</p>
       </div>
 
       {/* Row section */}
@@ -32,7 +32,7 @@ const Events = () => {
                   {row.day}, {row.date}
                 </span>
                 <div className="flex items-center gap-4 relative">
-                  <span className="text-2xl font-semibold text-[#5E362C]">
+                  <span className="text-2xl font-semibold text-[#5E362C]" style={{ fontFamily: 'Gloock, serif' }}>
                     {row.event}
                   </span>
                   <HoverReplace text={row.something} />

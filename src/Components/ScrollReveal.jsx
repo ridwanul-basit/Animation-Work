@@ -1,4 +1,5 @@
-import { useEffect, useRef, useMemo } from "react";
+// ScrollReveal.jsx
+import React, { useEffect, useRef, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -6,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ScrollReveal = ({
   children,
+  Tag = "p", // Custom tag support
   scrollContainerRef,
   enableBlur = true,
   baseOpacity = 0.1,
@@ -18,20 +20,36 @@ const ScrollReveal = ({
 }) => {
   const containerRef = useRef(null);
 
-  // Split text into words if children is a string
+  // Split text or JSX children into words and apply textClassName to each word
   const splitText = useMemo(() => {
-    const text = typeof children === "string" ? children : "";
-    return text.split(/(\s+)/).map((word, index) => {
-      if (word.match(/^\s+$/)) return word; // keep spaces
-      return (
-        <span className="inline-block word" key={index}>
-          {word}
-        </span>
-      );
-    });
-  }, [children]);
+    if (typeof children === "string") {
+      return children.split(/(\s+)/).map((word, index) => {
+        if (word.match(/^\s+$/)) return word; // keep spaces
+        return (
+          <span
+            className={`inline-block word ${textClassName}`} // <- apply textClassName here
+            key={index}
+          >
+            {word}
+          </span>
+        );
+      });
+    } else {
+      return React.Children.map(children, (child, index) => {
+        if (typeof child === "string") {
+          return (
+            <span className={`inline-block word ${textClassName}`} key={index}>
+              {child}
+            </span>
+          );
+        }
+        return child;
+      });
+    }
+  }, [children, textClassName]);
 
   useEffect(() => {
+    if (typeof window === "undefined") return; // SSR safety
     const el = containerRef.current;
     if (!el) return;
 
@@ -115,11 +133,11 @@ const ScrollReveal = ({
 
   return (
     <div ref={containerRef} className={`my-5 ${containerClassName}`}>
-      <p
-        className={`text-[clamp(1.6rem,4vw,3rem)] leading-[1.5] font-semibold ${textClassName}`}
+      <Tag
+        className={`overflow-hidden inline-block whitespace-normal ${textClassName}`}
       >
         {splitText}
-      </p>
+      </Tag>
     </div>
   );
 };
